@@ -16,6 +16,7 @@ set incsearch
 set nu
 set title
 set nojs
+set backspace=2
 
 " disable folding
 set nofoldenable
@@ -27,7 +28,8 @@ set formatoptions+=roqn
 set maxmempattern=20000
 
 syntax on
-colorscheme desert
+set background=dark
+colorscheme solarized
 
 set showmode
 set wildignore=*.swp,*.bak,*.pyc,*.class,*.jar,*.pdf,*.aux,*.bbl,*.bcf,*.blg,*.cls
