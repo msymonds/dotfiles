@@ -1,0 +1,108 @@
+set nocompatible
+
+call pathogen#infect()
+
+set nowrap
+set tabstop=4
+set shiftwidth=4
+set autoindent
+set smartindent
+set expandtab
+set showmatch
+set ignorecase
+set smartcase
+set hlsearch
+set incsearch
+set nu
+set title
+set nojs
+
+" disable folding
+set nofoldenable
+
+" Default for VIM is tcq
+set formatoptions+=roqn
+
+" size in KB
+set maxmempattern=20000
+
+syntax on
+colorscheme desert
+
+set showmode
+set wildignore=*.swp,*.bak,*.pyc,*.class,*.jar,*.pdf,*.aux,*.bbl,*.bcf,*.blg,*.cls
+
+" Alter recognition of file extensions
+au BufNewFile,BufRead *.sbt setlocal ft=scala
+au BufNewFile,BufRead *.gnu setlocal ft=gnuplot
+au BufNewFile,BufRead *.md setlocal ft=notes
+
+filetype plugin indent on
+autocmd Filetype python set nosmartindent copyindent
+autocmd Filetype tex set wrap linebreak spell spelllang=en " tw=100 fo=tcqw
+autocmd Filetype make set noexpandtab
+autocmd Filetype go set noexpandtab
+
+" Set default .tex to latex
+let g:tex_flavor = "latex"
+
+" Ctrlp
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_custom_ignore = '\v[\/](out|tmp|\.(git|hg|svn))$'
+
+" Trim whitespace when file is written
+autocmd BufWritePre * :%s/\s\+$//e
+
+" Let go fmt do the work for *.go
+"autocmd FileType go autocmd BufWritePre <buffer> Fmt
+
+" Show when lines have wrapped
+let &showbreak='>>'
+
+" Move next sentence to next line
+nnoremap <F2> f.li<CR><ESC>
+
+" Rerun the last command
+nnoremap <F5> :!!<CR>
+
+" Toggle paste mode
+nnoremap <F11> :set invpaste paste?<CR>
+
+" Fix syntax highlighting when broken
+nnoremap <F12> :syntax sync fromstart<CR>
+
+" Make navigating long lines a bit nicer
+nnoremap j gj
+nnoremap k gk
+
+" More accessible make
+nnoremap mm :make!<CR>
+
+" Disable the arrow keys.
+noremap <up> <nop>
+noremap <down> <nop>
+noremap <left> <nop>
+noremap <right> <nop>
+
+" Get out of insert mode without leaving the home row
+inoremap jj <ESC>
+
+" Aliases for ex commands
+cnoreabbrev W w
+cnoreabbrev Q q
+cnoreabbrev WQ wq
+cnoreabbrev Wq wq
+
+" vim-notes plugin
+let g:notes_directories = ['~/.notes']
+let g:notes_smart_quotes = 0
+let g:notes_unicode_enabled = 0
+
+let g:notes_indents = 1
+let g:notes_indents_right = ">>"
+let g:notes_indents_left = "<<"
+
+highlight link notesEmailAddr Directory
+highlight link notesRealURL Special
+highlight link notesShortHeading None

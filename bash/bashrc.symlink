@@ -1,0 +1,59 @@
+# Grab system-wide settings
+[ -f /etc/bashrc ] && source /etc/bashrc
+
+path_add() {
+  [ -d $1 ] && PATH=$PATH:$1
+}
+
+path_add $HOME/bin
+path_add /usr/local/go/bin
+
+unset path_add
+
+# If not running interactively, don't do anything
+[ -z "$PS1" ] && return
+
+# If running in a virtual console, set a timeout
+if [ ! -z $(tty | grep tty) ]; then
+  echo "Setting a timeout to close console after 10 mins of inactivity"
+  TMOUT=600
+fi
+
+#set -o vi
+EDITOR=vim
+
+# don't put duplicate lines in the history. See bash(1) for more options
+# ... or force ignoredups and ignorespace
+HISTCONTROL=ignoredups:ignorespace
+
+# append to the history file, don't overwrite it
+shopt -s histappend
+
+# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+HISTSIZE=10000
+HISTFILESIZE=20000
+
+# check the window size after each command and, if necessary,
+# update the values of LINES and COLUMNS.
+shopt -s checkwinsize
+
+# Alias and function definitions.
+[ -f ~/.bash_aliases ] && source ~/.bash_aliases
+[ -f ~/.bash_functions ] && source ~/.bash_functions
+
+# cdargs functions for faster directory navigation
+. ~/.dotfiles/cdargs/cdargs-bash.sh
+
+# Update the title before each prompt
+case "$TERM" in
+xterm*|rxvt*)
+  PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD}\007"'
+  ;;
+*)
+  ;;
+esac
+
+# enable bash completion in interactive shells
+if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
+  . /etc/bash_completion
+fi
