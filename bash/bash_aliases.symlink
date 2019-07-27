@@ -8,3 +8,6 @@ alias dmake='cmake -GNinja -DCMAKE_BUILD_TYPE=Debug -DCMAKE_EXPORT_COMPILE_COMMA
 
 # gdb
 alias gdb='gdb -tui'
+
+# grep
+alias grepp='grep -riIn'
