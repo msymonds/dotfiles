@@ -57,3 +57,13 @@ esac
 if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
   . /etc/bash_completion
 fi
+
+if [ -f $HOME/bin/gimme ]; then
+    unset GOOS;
+    unset GOARCH;
+    export GOROOT=$HOME'/.gimme/versions/go1.11.linux.amd64';
+    export PATH=$HOME'/.gimme/versions/go1.11.linux.amd64/bin':${PATH};
+    go version >&2;
+    export GIMME_ENV=$HOME'/.gimme/envs/go1.11.linux.amd64.env';
+fi
+

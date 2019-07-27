@@ -29,7 +29,9 @@ set maxmempattern=20000
 
 syntax on
 set background=dark
-colorscheme solarized
+colorscheme desert
+" Set color bar to maintain readability
+set cc=80
 
 set showmode
 set wildignore=*.swp,*.bak,*.pyc,*.class,*.jar,*.pdf,*.aux,*.bbl,*.bcf,*.blg,*.cls
@@ -54,7 +56,7 @@ let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_custom_ignore = '\v[\/](out|tmp|\.(git|hg|svn))$'
 
 " Trim whitespace when file is written
-autocmd BufWritePre * :%s/\s\+$//e
+" autocmd BufWritePre * :%s/\s\+$//e
 
 " Let go fmt do the work for *.go
 "autocmd FileType go autocmd BufWritePre <buffer> Fmt
@@ -79,7 +81,9 @@ nnoremap j gj
 nnoremap k gk
 
 " More accessible make
-nnoremap mm :make!<CR>
+" nnoremap mm :make!<CR>
+nnoremap mm :!ninja<CR>
+nnoremap ,, :!./push<CR>
 
 " Disable the arrow keys.
 noremap <up> <nop>
@@ -89,6 +93,14 @@ noremap <right> <nop>
 
 " Get out of insert mode without leaving the home row
 inoremap jj <ESC>
+
+" CLANG Format
+function FormatFile()
+    let l:lines="all"
+    py3f ~/.dotfiles/vim/vim.symlink/clang-format.py
+endfunction
+map <C-K> :call FormatFile()<cr>
+imap <C-K> <c-o>:call FormatFile()<cr>
 
 " Aliases for ex commands
 cnoreabbrev W w
@@ -104,6 +116,8 @@ let g:notes_unicode_enabled = 0
 let g:notes_indents = 1
 let g:notes_indents_right = ">>"
 let g:notes_indents_left = "<<"
+
+let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
 
 highlight link notesEmailAddr Directory
 highlight link notesRealURL Special

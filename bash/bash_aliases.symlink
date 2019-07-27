@@ -1,3 +1,10 @@
 # Aliases for ls
-alias ll='ls -al'
+alias ll='ls -al --color=auto'
+alias ls='ls --color=auto'
 
+# For YouCompleteMe Bash plugin
+alias cmake='cmake -GNinja -DCMAKE_EXPORT_COMPILE_COMMANDS=on'
+alias dmake='cmake -GNinja -DCMAKE_BUILD_TYPE=Debug -DCMAKE_EXPORT_COMPILE_COMMANDS=on'
+
+# gdb
+alias gdb='gdb -tui'
