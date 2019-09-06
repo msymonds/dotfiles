@@ -31,14 +31,21 @@ mv .bashrc bk/bashrc_bk
 mv .vimrc bk/vimrc_bk
 
 
+# install the dotfiles so the path is set for gimme
+cd .dotfiles
+./install.sh
+cd ~/
+source .bashrc
+
+
 # go gimme
 mkdir bin
 sudo apt-get install curl
 curl -sL -o ~/bin/gimme https://raw.githubusercontent.com/travis-ci/gimme/master/gimme
 chmod +x ~/bin/gimme
 eval "$(GIMME_GO_VERSION=1.11 gimme)"
-cat "# gimme" >> ~/.bash_profile
-cat "eval \"$(GIMME_GO_VERSION=1.11 gimme)\"" >> ~/.bash_profile
+echo "# gimme" >> ~/.bash_profile
+echo 'eval "$(GIMME_GO_VERSION=1.11 gimme)"' >> ~/.bash_profile
 
 
 # set up the Go environment
