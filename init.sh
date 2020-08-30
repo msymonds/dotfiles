@@ -32,7 +32,7 @@ mv .vimrc bk/vimrc_bk
 
 
 # install the dotfiles so the path is set for gimme
-cd dotfiles
+cd .dotfiles
 ./install.sh
 cd ~/
 source .bashrc
@@ -54,13 +54,13 @@ mkdir -p ~/dev/go/src/github.com/msymonds
 
 
 # .dotfiles
-cd ~/dotfiles
+cd ~/.dotfiles
 git submodule init
 git submodule update --recursive
 
 
 # YCM
-cd ~/dotfiles/vim/vim.symlink/bundle/YouCompleteMe
+cd ~/.dotfiles/vim/vim.symlink/bundle/YouCompleteMe
 git submodule update --init --recursive
 sudo apt install build-essential cmake python3-dev
 python3 install.py --clang-completer --go-completer
